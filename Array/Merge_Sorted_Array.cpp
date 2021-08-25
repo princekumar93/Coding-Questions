@@ -1,0 +1,42 @@
+/*
+Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+Output: [1,2,2,3,5,6]
+Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+*/
+class Solution
+{
+public:
+    void merge(vector<int> &nums1, int m, vector<int> &nums2, int n)
+    {
+        vector<int> result(m + n);
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (i < m && j < n)
+        {
+            if (i == m || j == n)
+                break;
+
+            if (nums1[i] > nums2[j])
+                result[k++] = nums2[j++];
+            else
+                result[k++] = nums1[i++];
+        }
+
+        while (i < m)
+        {
+            result[k++] = nums1[i++];
+        }
+        while (j < n)
+        {
+            result[k++] = nums2[j++];
+        }
+
+        for (int i = 0; i < result.size(); i++)
+        {
+            nums1[i] = result[i];
+        }
+    }
+};
